@@ -1,3 +1,6 @@
+
+
+
 <template>
     <div>
         <h1>Posts</h1>
@@ -38,10 +41,12 @@
             }
         },
         created() {
-            let uri = 'http://127.0.0.1:8000/';
+            let uri = 'http://127.0.0.1:8000/posts';
             this.axios.get(uri).then(response => {
                 this.posts = response.data.data;
             });
+            // console.log(response.data)
+           // this.axios.get("/user").then(({posts}))=>(this.users =response.data.data));
         },
         methods: {
             deletePost(id)

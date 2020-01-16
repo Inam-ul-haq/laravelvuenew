@@ -16,10 +16,16 @@ import axios from 'axios';
 
 
 
-import { Form, HasError, AlertError } from 'vform'
+import { Form, HasError, AlertError } from 'vform';
 
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
+
+Window.Form = Form;
+import swal from 'sweetalert2'
+Window.swal = swal;
+
+
 
 
 

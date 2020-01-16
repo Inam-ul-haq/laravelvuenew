@@ -1,38 +1,33 @@
 
 
 <template>
-<!--    https://appdividend.com/2018/11/17/vue-laravel-crud-example-tutorial-from-scratch/-->
+
     <div>
         <h1>Create A Post</h1>
-        <form @submit.prevent="addPost"  @keydown="form.onKeydown($event)">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Post Title:</label>
-                        <input type="text" class="form-control" v-model="post.title"  name="title":class="{ 'is-invalid': form.errors.has('title') }">
-                        <has-error :form="form" field="title"></has-error>
-                    </div>
-                </div>
+        <form @submit.prevent="addPost" >
+            <div class="form-group">
+                <label>Title</label>
+                <input v-model="form.title" type="text" name="title"
+                       class="form-control" :class="{ 'is-invalid': form.errors.has('title') }"  >
+                <has-error :form="form" field="title"></has-error>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Post Body:</label>
-                        <textarea class="form-control" v-model="post.body" rows="5"  name="body":class="{ 'is-invalid': form.errors.has('body') }"></textarea>
-                        <has-error :form="form" field="body"></has-error>
-                    </div>
-                </div>
+            <div class="form-group">
+                <label>Body</label>
+                <input v-model="form.body" type="text" name="body"
+                       class="form-control" :class="{ 'is-invalid': form.errors.has('body') }"  >
+                <has-error :form="form" field="body"></has-error>
             </div>
-
             <br/>
             <div class="form-group">
-                <button class="btn btn-primary">Create</button>
+                <button  class="btn btn-primary">Create</button>
             </div>
         </form>
     </div>
 </template>
 
 <script>
+    import Form from 'vform';
+    import swal from 'sweetalert2';
     export default {
 
 
@@ -49,10 +44,31 @@
 
         methods: {
             addPost () {
+
+               if(this.form.title == '' || this.form.body == ''){
+                   this.form.post('/create');
+               }else{
+                   this.form.post('/create');
+                   // .then((response) => {
+                   //         this.$router.push({name: 'posts'}); });
+                   swal({
+                       position: 'top-end',
+                       icon: 'success',
+                       title: 'post save on the database',
+                       showConfirmButton: false,
+                       timer: 100
+                   })
+               }
                 // Submit the form via a POST request
-                this.form.post('/create')
-                    .then(({ data }) => { console.log(data) })
-            }
+
+                // .then(({ data }) => { console.log(data) })
+            },
+
+
+
+        },
+        mounted() {
+            console.log('component monted')
         }
     }
 
