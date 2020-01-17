@@ -6,7 +6,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Post Title:</label>
-                        <input type="text" class="form-control" v-model="post.title">
+                        <input type="text" class="form-control" v-model="post.title" required>
                     </div>
                 </div>
             </div>
@@ -14,7 +14,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Post Body:</label>
-                        <textarea class="form-control" v-model="post.body" rows="5"></textarea>
+                        <textarea class="form-control" v-model="post.body" rows="5"required></textarea>
                     </div>
                 </div>
             </div><br />
@@ -49,3 +49,4 @@
         }
     }
 </script>
+

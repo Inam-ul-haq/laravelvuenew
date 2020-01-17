@@ -28,9 +28,9 @@ class PostController extends Controller
     }
     public function index()
     {
-        echo  "I am here";
-      dd(Post::all());
-        return response(Post::all());
+//        echo  "I am here";
+//      dd(Post::all());
+        return new PostCollection(Post::all());
     }
 
 
@@ -42,6 +42,10 @@ class PostController extends Controller
 
     public function update($id, Request $request)
     {
+//        $this->validate($request,[
+//            'title'=>'requird',
+//            'body'=>'required',
+//        ]);
         $post = Post::find($id);
 
         $post->update($request->all());

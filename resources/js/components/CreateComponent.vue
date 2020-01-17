@@ -1,25 +1,29 @@
-
-
 <template>
 
     <div>
         <h1>Create A Post</h1>
         <form @submit.prevent="addPost" >
+            <div class="row">
+                <div class="col-md-6">
             <div class="form-group">
                 <label>Title</label>
                 <input v-model="form.title" type="text" name="title"
-                       class="form-control" :class="{ 'is-invalid': form.errors.has('title') }"  >
+                       class="form-control" :class="{ 'is-invalid': form.errors.has('title') }" required>
                 <has-error :form="form" field="title"></has-error>
             </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
             <div class="form-group">
                 <label>Body</label>
-                <input v-model="form.body" type="text" name="body"
-                       class="form-control" :class="{ 'is-invalid': form.errors.has('body') }"  >
+                <textarea v-model="form.body" type="text" name="body"
+                          class="form-control" :class="{ 'is-invalid': form.errors.has('body') }" required></textarea>
                 <has-error :form="form" field="body"></has-error>
-            </div>
+            </div></div></div>
             <br/>
             <div class="form-group">
-                <button  class="btn btn-primary">Create</button>
+                <button   class="btn btn-primary">Create</button>
             </div>
         </form>
     </div>
@@ -27,7 +31,10 @@
 
 <script>
     import Form from 'vform';
-    import swal from 'sweetalert2';
+    import Swal from 'sweetalert2';
+
+    // import Swal from 'sweetalert2';
+
     export default {
 
 
@@ -49,14 +56,22 @@
                    this.form.post('/create');
                }else{
                    this.form.post('/create');
-                   // .then((response) => {
-                   //         this.$router.push({name: 'posts'}); });
-                   swal({
+
+                   const Toast = Swal.mixin({
+                       toast: true,
                        position: 'top-end',
-                       icon: 'success',
-                       title: 'post save on the database',
                        showConfirmButton: false,
-                       timer: 100
+                       timer: 3000,
+                       timerProgressBar: true,
+                       onOpen: (toast) => {
+                           toast.addEventListener('mouseenter', Swal.stopTimer)
+                           toast.addEventListener('mouseleave', Swal.resumeTimer)
+                       }
+                   })
+
+                   Toast.fire({
+                       icon: 'success',
+                       title: 'Save data in successfully'
                    })
                }
                 // Submit the form via a POST request

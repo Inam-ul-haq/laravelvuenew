@@ -21,9 +21,20 @@ import { Form, HasError, AlertError } from 'vform';
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 
-Window.Form = Form;
-import swal from 'sweetalert2'
-Window.swal = swal;
+window.Form = Form;
+import Swal from 'sweetalert2';
+window.Swal = Swal;
+
+
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faUserSecret } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
+library.add(faUserSecret);
+
+Vue.component('font-awesome-icon', FontAwesomeIcon);
+
+Vue.config.productionTip = false;
 
 
 
@@ -50,7 +61,7 @@ const routes = [
     },
     {
         name: 'posts',
-        path: '/posts',
+        path: '/postslist',
         component: IndexComponent
     },
     {
